@@ -6,16 +6,15 @@ const UserModel = require('./models/Users');
 mongoose.connect(
     'mongodb+srv://My1habit:$Let4820$@cluster0.dwelmno.mongodb.net/habits?retryWrites=true&w=majority'
 );
-
-
-app.get('/getUsers', async function(req, res) {
-    await UserModel.find({}, (err, result) => {
-        if (err){
+app.get('./getUsers', async (req, res) => {
+    UserModel.find({}, (err, result) => {
+        if(err){
             res.json(err);
         } else {
             res.json(result);
         }
-    })
+    
+})
 });
 
 
