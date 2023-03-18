@@ -1,19 +1,19 @@
-import express, { json } from 'express';
+const express = require('express');
 const app = express();
-import { connect } from 'mongoose';
-import UserModel, { find } from './models/Users';
-import cors from 'cors';
+const mongoose = require('mongoose');
+const UserModel = require('./models/Users');
+const cors = require('cors');
 
-app.use(json());
+app.use(express.json());
 app.use(cors());
 
-connect(
-      'mongodb+srv://My1habit:$Let4820$@cluster0.dwelmno.mongodb.net/habits?retryWrites=true&w=majority'
+mongoose.connect(
+    'mongodb+srv://My1habit:Let4820@cluster0.b6rtaus.mongodb.net/habits?retryWrites=true&w=majority'
  );
 
 
 app.get('./getUsers', (req, res) =>  {
-    find({}, (err, result) => {
+    UserModel.find({}, (err, result) => {
         if(err){
             res.json(err);
         } else {
@@ -32,6 +32,6 @@ app.post('./createUser', async (req, res) => {
     res.json(user);
 })
 
-app.listen(3000, () => {
+app.listen(3001, () => {
     console.log('Yay! The Server is working.');
 });
